@@ -1,12 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { UserButton, auth } from "@clerk/nextjs";
-import Image from "next/image";
 import Link from "next/link";
 import { LogIn } from "lucide-react";
+import FileUpload from "@/components/FileUpload";
+import { is } from "drizzle-orm";
+
+import { currentUser } from "@clerk/nextjs";
+import type { User } from "@clerk/nextjs/api";
 
 export default async function Home() {
-	const { userId } = await auth();
-	const isAuth = !!userId;
+	const { userId } = auth();
+	const user: User | null = await currentUser();
+	const isAuth = !userId;
+	console.log("userIDDDD ", isAuth);
 	return (
 		<div className="w-screen min-h-screen bg-gradient-to-r from-rose-100 to-teal-100">
 			<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -25,7 +31,7 @@ export default async function Home() {
 
 					<div className="w-full mt-4">
 						{isAuth ? (
-							<h1>fileUpload</h1>
+							<FileUpload />
 						) : (
 							<Link href={"/sign-in"}>
 								<Button>
