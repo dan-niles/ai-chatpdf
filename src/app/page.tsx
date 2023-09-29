@@ -21,13 +21,15 @@ export default async function Home() {
 						<h1 className="mr-3 text-5xl font-semibold">Chat with any PDF</h1>
 						<UserButton afterSignOutUrl="/" />
 					</div>
-					<div className="flex mt-2">
-						{isAuth && <Button>Go to Chats</Button>}
-					</div>
+
 					<p className="max-w-xl mt-1 test-lg text-slate-600">
 						Join millions of students, researchers and professionals to
 						instantly answer questions and research with AI
 					</p>
+
+					<div className="flex mt-2">
+						{isAuth && <Button>Go to Chats</Button>}
+					</div>
 
 					<div className="w-full mt-4">
 						{isAuth ? (
