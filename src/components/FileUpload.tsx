@@ -1,13 +1,16 @@
 "use client";
 import { uploadToS3 } from "@/lib/s3";
 import { useMutation } from "@tanstack/react-query";
-import { Inbox } from "lucide-react";
+import { Inbox, Loader2 } from "lucide-react";
 import React from "react";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
+import toast from "react-hot-toast";
+import { useState } from "react";
 
 const FileUpload = () => {
-	const { mutate } = useMutation({
+	const [uploading, setUploading] = useState(false);
+	const { mutate, isLoading } = useMutation({
 		mutationFn: async ({
 			file_key,
 			file_name,
@@ -31,29 +34,34 @@ const FileUpload = () => {
 			console.log(file);
 
 			if (file.size > 10 * 1024 * 1024) {
-				alert("Please upload a file smaller than 10MB");
+				toast.error("Please upload a file smaller than 10MB");
 				return;
 			}
 
 			try {
+				setUploading(true);
 				const data = await uploadToS3(file);
 				if (!data?.file_key || !data.file_name) {
-					alert("Error uploading file");
+					toast.error("Error uploading file");
 					return;
 				}
 				mutate(data, {
 					onSuccess: (data) => {
+						toast.success(data.message);
 						console.log("success", data);
 					},
 					onError: (error) => {
+						toast.error("Error creating chat");
 						console.log("error", error);
 					},
 				});
 				console.log("data", data);
 			} catch (error) {
 				console.log(error);
-				alert("Error uploading file");
+				toast.error("Error uploading file");
 				return;
+			} finally {
+				setUploading(false);
 			}
 		},
 	});
@@ -66,10 +74,17 @@ const FileUpload = () => {
 				})}
 			>
 				<input className="hidden" {...getInputProps} />
-				<div className="flex justify-center items-center flex-col">
-					<Inbox className="w-10 h-10 text-blue-500" />
-					<p className="mt-2 text-sm text-slate-400">Drop PDF here</p>
-				</div>
+				{uploading || isLoading ? (
+					<>
+						<Loader2 className="h-10 w-10 text-blue-500 animate-spin" />
+						<p className="mt-2 text-sm text-slate-400">Sending to GPT</p>
+					</>
+				) : (
+					<div className="flex justify-center items-center flex-col">
+						<Inbox className="w-10 h-10 text-blue-500" />
+						<p className="mt-2 text-sm text-slate-400">Drop PDF here</p>
+					</div>
+				)}
 			</div>
 		</div>
 	);
