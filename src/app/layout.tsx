@@ -9,7 +9,6 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	title: "ChatPDF",
-	description: "Ask anything from your PDFs",
 };
 
 export default function RootLayout({
