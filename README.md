@@ -4,7 +4,7 @@
 
 This project is a clone of the well-known website [www.chatpdf.com](https://www.chatpdf.com/). The primary objective behind recreating this application is to explore and learn new technologies, as well as expand my knowledge base.
 
-![ChatPDF Screenshot](screenshots/1.png)
+![ChatPDF Screenshot](screenshots/1.png) ![ChatPDF Screenshot](screenshots/2.png)
 
 ## Technologies
 
