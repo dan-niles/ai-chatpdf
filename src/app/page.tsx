@@ -46,8 +46,8 @@ export default async function Home() {
 					</div>
 
 					<p className="max-w-xl mt-1 text-lg text-slate-600">
-						Join millions of students, researchers and professionals to
-						instantly answer questions and understand research with AI
+						Drop your PDF files here to instantly answer questions and
+						understand any aspect of it with AI
 					</p>
 
 					<div className="w-full mt-4">
