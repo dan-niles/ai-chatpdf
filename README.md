@@ -6,6 +6,19 @@ This project is a clone of the well-known website [www.chatpdf.com](https://www.
 
 ![ChatPDF Screenshot](screenshots/1.png)
 
+## Technologies
+
+This project is built using the following technologies:
+
+- [Next.js](https://nextjs.org/)
+- [React](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [NeonDB](https://neondb.io/)
+- [PineconeDB](https://pineconedb.io/)
+- [OpenAI API](https://openai.com/)
+- [Clerk Auth](https://clerk.dev/)
+- [AWS S3](https://aws.amazon.com/s3/)
+
 ## Getting Started
 
 To clone the repository, run the following:
