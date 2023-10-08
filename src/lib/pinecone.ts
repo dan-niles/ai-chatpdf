@@ -30,7 +30,7 @@ export async function loadS3IntoPinecone(fileKey: string) {
 	if (!file_name) {
 		throw new Error("could not download from s3");
 	}
-	console.log("loading pdf into memory" + file_name);
+	console.log("loading pdf into memory " + file_name);
 	const loader = new PDFLoader(file_name);
 	const pages = (await loader.load()) as PDFPage[];
 
@@ -41,8 +41,11 @@ export async function loadS3IntoPinecone(fileKey: string) {
 	const vectors = await Promise.all(documents.flat().map(embedDocument));
 
 	// 4. upload to pinecone
-	const client = await getPineconeClient();
-	const pineconeIndex = await client.index("chatpdf");
+	const client = new Pinecone({
+		environment: process.env.PINECONE_ENVIRONMENT!,
+		apiKey: process.env.PINECONE_API_KEY!,
+	});
+	const pineconeIndex = client.index("chatpdf");
 	const namespace = pineconeIndex.namespace(convertToAscii(fileKey));
 
 	console.log("inserting vectors into pinecone");

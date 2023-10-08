@@ -44,7 +44,7 @@ export async function uploadToS3(file: File) {
 	} catch {}
 }
 
-export function getS3URL(file_key: String) {
+export function getS3Url(file_key: String) {
 	const url =
 		"https://" +
 		process.env.NEXT_PUBLIC_S3_BUCKET_NAME +

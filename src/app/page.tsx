@@ -10,7 +10,8 @@ import { chats } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 
 export default async function Home() {
-	const { userId } = await auth();
+	// let { userId } = await auth();
+	let userId = "user_2Vz7igVrb0Fj562dyWW2MU4PavP";
 	const isAuth = !!userId;
 	// const isPro = await checkSubscription();
 	let firstChat;
