@@ -23,7 +23,7 @@ const MessageList = ({ messages, isLoading }: Props) => {
 				return (
 					<div
 						key={message.id}
-						className={cn("flex", {
+						className={cn("flex my-1", {
 							"justify-end pl-10": message.role === "user",
 							"justify-start pr-10": message.role === "assistant",
 						})}
