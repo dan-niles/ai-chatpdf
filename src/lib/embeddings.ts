@@ -14,6 +14,11 @@ export async function getEmbeddings(text: string) {
 		});
 		const result = await response.json();
 		console.log("calling openai embeddings api result: ------- ", result);
+
+		if (!result.data || !result.data[0]) {
+			throw new Error("no data returned from openai embeddings api");
+		}
+
 		return result.data[0].embedding as number[];
 	} catch (error) {
 		console.log("error calling openai embeddings api", error);
